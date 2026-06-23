@@ -324,6 +324,66 @@
     .nav-toggle{display:flex;}
   }
 
+  /* ---------- Portfólio (Power BI embeds com abas) ---------- */
+  .portfolio-section{padding:88px 0;}
+  .portfolio-tabs-bar{
+    display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px;
+  }
+  .ptab-btn{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500;
+    padding:10px 20px; border-radius:999px; cursor:pointer;
+    border:1px solid var(--line); background:var(--panel); color:var(--ink-soft);
+    transition:background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .ptab-btn .ptab-dot{
+    width:7px; height:7px; border-radius:50%; flex:none;
+    opacity:0.45; transition:opacity .15s;
+  }
+  .ptab-btn.active{
+    background:var(--ink); color:var(--paper); border-color:var(--ink);
+    box-shadow:0 4px 14px rgba(16,20,28,0.2);
+  }
+  .ptab-btn.active .ptab-dot{ opacity:1; }
+  .ptab-btn:hover:not(.active){ border-color:var(--ink); color:var(--ink); }
+
+  .portfolio-panel{ display:none; }
+  .portfolio-panel.active{ display:block; }
+
+  .project-embed-wrap{
+    position:relative; border-radius:var(--radius-lg); overflow:hidden;
+    border:1px solid var(--line); box-shadow:var(--shadow);
+    background:var(--ink);
+  }
+  .project-embed-bar{
+    display:flex; align-items:center; gap:10px; padding:12px 18px;
+    background:var(--ink); border-bottom:1px solid #2A2F3A;
+  }
+  .embed-bar-dot{width:10px; height:10px; border-radius:50%;}
+  .embed-bar-title{
+    flex:1; font-family:'IBM Plex Mono',monospace; font-size:12px;
+    color:#7D8392; text-align:center; letter-spacing:.03em;
+  }
+  .embed-bar-badge{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold);
+    background:rgba(185,138,46,0.12); border:1px solid rgba(185,138,46,0.25);
+    border-radius:999px; padding:3px 10px;
+  }
+  .project-iframe{
+    display:block; width:100%; border:none;
+    height:600px; background:#1A1F2B;
+  }
+  @media(max-width:880px){ .project-iframe{height:420px;} }
+
+  .project-meta{
+    display:flex; flex-wrap:wrap; gap:24px; margin-top:28px;
+    padding-top:28px; border-top:1px solid var(--line);
+  }
+  .project-meta-item{ display:flex; flex-direction:column; gap:4px; }
+  .project-meta-label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em;}
+  .project-meta-value{font-size:14px; font-weight:500; color:var(--ink-soft);}
+  .project-desc{font-size:14.5px; color:var(--ink-soft); max-width:740px; margin-bottom:22px; line-height:1.65;}
+
   /* ---------- Scroll progress ---------- */
   .scroll-progress{
     position:fixed; top:0; left:0; height:3px; width:0%; z-index:200;
@@ -352,6 +412,7 @@
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#projeto">Projeto real</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
       <li><a href="#diferenciais">Diferenciais</a></li>
       <li><a href="#contato">Contato</a></li>
@@ -571,6 +632,114 @@
     </div>
   </section>
 
+  <!-- ============ PORTFÓLIO ============ -->
+  <section class="portfolio-section" id="projeto">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Projetos reais</span>
+        <h2>Dashboards entregues — veja o resultado final.</h2>
+        <p class="section-desc">Três áreas, três painéis distintos. Navegue pelas abas e interaja com os dashboards publicados diretamente no Power BI.</p>
+      </div>
+
+      <div class="reveal">
+        <!-- Abas -->
+        <div class="portfolio-tabs-bar" role="tablist" aria-label="Portfólio de dashboards">
+          <button class="ptab-btn active" data-ptab="logistica" role="tab" aria-selected="true">
+            <span class="ptab-dot" style="background:#B98A2E;"></span>Logística
+          </button>
+          <button class="ptab-btn" data-ptab="financeiro" role="tab" aria-selected="false">
+            <span class="ptab-dot" style="background:#155E54;"></span>Financeiro
+          </button>
+          <button class="ptab-btn" data-ptab="rh" role="tab" aria-selected="false">
+            <span class="ptab-dot" style="background:#5B4FB0;"></span>RH
+          </button>
+        </div>
+
+        <!-- Painel Logística -->
+        <div class="portfolio-panel active" data-ppanel="logistica">
+          <p class="project-desc">Visão consolidada da operação logística: receita bruta, custo total e resultado por filial e veículo. Inclui indicadores de nível de serviço — OTIF, On Time e In Full — para monitorar a qualidade das entregas em tempo real.</p>
+          <div class="project-embed-wrap">
+            <div class="project-embed-bar">
+              <span class="embed-bar-dot" style="background:#FF5F57;"></span>
+              <span class="embed-bar-dot" style="background:#FEBC2E;"></span>
+              <span class="embed-bar-dot" style="background:#28C840;"></span>
+              <span class="embed-bar-title">Logística — Receita · Custo · OTIF · On Time · In Full</span>
+              <span class="embed-bar-badge">ao vivo</span>
+            </div>
+            <iframe
+              class="project-iframe"
+              title="Dashboard de Logística — Fidelis Data"
+              src="https://app.powerbi.com/view?r=eyJrIjoiOTJmNDZiMzYtODAzOC00MjkzLWE1MTAtMmRkYTg3MjNhYjZkIiwidCI6Ijk0MDc0NzExLTc1MmMtNDA5My04M2ZiLTIzMGJhMzJlMTVhMSJ9"
+              allowfullscreen="true"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item"><span class="project-meta-label">Área</span><span class="project-meta-value">Logística</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Indicadores</span><span class="project-meta-value">Receita bruta · Custo total · OTIF · On Time · In Full</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Visões</span><span class="project-meta-value">Por filial e por veículo</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Recursos</span><span class="project-meta-value">DAX · Power Query · Modelo estrela</span></div>
+          </div>
+        </div>
+
+        <!-- Painel Financeiro -->
+        <div class="portfolio-panel" data-ppanel="financeiro">
+          <p class="project-desc">Painel financeiro com acompanhamento de receitas, despesas, DRE e fluxo de caixa. Visão consolidada e por centro de custo, com drill-down temporal e comparativo de períodos.</p>
+          <div class="project-embed-wrap">
+            <div class="project-embed-bar">
+              <span class="embed-bar-dot" style="background:#FF5F57;"></span>
+              <span class="embed-bar-dot" style="background:#FEBC2E;"></span>
+              <span class="embed-bar-dot" style="background:#28C840;"></span>
+              <span class="embed-bar-title">Financeiro — DRE · Fluxo de caixa · Centro de custo</span>
+              <span class="embed-bar-badge">ao vivo</span>
+            </div>
+            <iframe
+              class="project-iframe"
+              title="Dashboard Financeiro — Fidelis Data"
+              src="https://app.powerbi.com/view?r=eyJrIjoiMzQyODkxMzItZDYwOS00MmE1LWJmMzctYTMzOWU0YTIxMzQxIiwidCI6Ijk0MDc0NzExLTc1MmMtNDA5My04M2ZiLTIzMGJhMzJlMTVhMSJ9"
+              allowfullscreen="true"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item"><span class="project-meta-label">Área</span><span class="project-meta-value">Financeiro</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Indicadores</span><span class="project-meta-value">DRE · Fluxo de caixa · Receita · Despesa</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Visões</span><span class="project-meta-value">Consolidado e por centro de custo</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Recursos</span><span class="project-meta-value">DAX · Power Query · Modelo estrela</span></div>
+          </div>
+        </div>
+
+        <!-- Painel RH -->
+        <div class="portfolio-panel" data-ppanel="rh">
+          <p class="project-desc">Dashboard de gestão de pessoas com headcount, turnover, absenteísmo e distribuição por cargo e departamento. Permite acompanhar a evolução do quadro e antecipar riscos de desligamento.</p>
+          <div class="project-embed-wrap">
+            <div class="project-embed-bar">
+              <span class="embed-bar-dot" style="background:#FF5F57;"></span>
+              <span class="embed-bar-dot" style="background:#FEBC2E;"></span>
+              <span class="embed-bar-dot" style="background:#28C840;"></span>
+              <span class="embed-bar-title">RH — Headcount · Turnover · Absenteísmo</span>
+              <span class="embed-bar-badge">ao vivo</span>
+            </div>
+            <iframe
+              class="project-iframe"
+              title="Dashboard de RH — Fidelis Data"
+              src="https://app.powerbi.com/view?r=eyJrIjoiOWM4MjY0OWMtOWJiMi00NDhiLThiN2MtOGQyZDcyZjZlZmQxIiwidCI6Ijk0MDc0NzExLTc1MmMtNDA5My04M2ZiLTIzMGJhMzJlMTVhMSJ9"
+              allowfullscreen="true"
+              loading="lazy"
+            ></iframe>
+          </div>
+          <div class="project-meta">
+            <div class="project-meta-item"><span class="project-meta-label">Área</span><span class="project-meta-value">Recursos Humanos</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Indicadores</span><span class="project-meta-value">Headcount · Turnover · Absenteísmo</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Visões</span><span class="project-meta-value">Por cargo e departamento</span></div>
+            <div class="project-meta-item"><span class="project-meta-label">Recursos</span><span class="project-meta-value">DAX · Power Query · Modelo estrela</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PROCESS ============ -->
   <section class="section" id="como-funciona" style="padding-top:0;">
     <div class="wrap">
@@ -689,6 +858,7 @@
         <h4>Navegação</h4>
         <ul>
           <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#projeto">Projeto real</a></li>
           <li><a href="#como-funciona">Como funciona</a></li>
           <li><a href="#diferenciais">Diferenciais</a></li>
         </ul>
@@ -918,6 +1088,23 @@
   }
   document.addEventListener('scroll', updateScrollProgress, {passive:true});
   updateScrollProgress();
+  /* Portfólio tabs */
+  var ptabBtns = document.querySelectorAll('.ptab-btn');
+  var ppanels = document.querySelectorAll('.portfolio-panel');
+  ptabBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = btn.getAttribute('data-ptab');
+      ptabBtns.forEach(function(b){
+        var on = b.getAttribute('data-ptab') === target;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      ppanels.forEach(function(p){
+        p.classList.toggle('active', p.getAttribute('data-ppanel') === target);
+      });
+    });
+  });
+
 })();
 </script>
 
