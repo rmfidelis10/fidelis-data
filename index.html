@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fidelis Analytics — Consultoria em Power BI, Excel e Automações N8N</title>
+  <meta name="description" content="Consultoria em análise de dados: dashboards em Power BI, modelagem em Excel e automações com N8N para times que querem decidir com clareza.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #131a24;
+      --bg-card: #1a2230;
+      --fg: #f0ede8;
+      --muted: #9aa3b0;
+      --emerald: #4adea8;
+      --emerald-dim: rgba(74,222,168,0.15);
+      --border: #2a3545;
+      --ink: #0c1018;
+      --gold: #e4c97a;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; border-color:var(--border); }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      -webkit-font-smoothing: antialiased;
+      line-height:1.6;
+    }
+    ::selection { background: var(--gold); color: var(--ink); }
+
+    .font-display { font-family: 'Fraunces', Georgia, serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* Nav */
+    header {
+      position:fixed; top:0; left:0; right:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(19,26,36,0.7);
+      border-bottom:1px solid var(--border);
+    }
+    header .inner {
+      max-width:1280px; margin:0 auto; padding:0 24px;
+      height:64px; display:flex; align-items:center; justify-content:space-between;
+    }
+    header nav { display:flex; gap:32px; font-size:14px; color:var(--muted); }
+    header nav a { color:inherit; text-decoration:none; transition:color .3s; }
+    header nav a:hover { color:var(--fg); }
+    header .cta {
+      font-size:14px; font-weight:500; padding:8px 20px; border-radius:999px;
+      background:var(--fg); color:var(--bg); text-decoration:none;
+      transition:all .3s;
+    }
+    header .cta:hover { background:var(--emerald); color:var(--ink); }
+
+    /* Hero */
+    .hero {
+      position:relative; padding-top:160px; padding-bottom:128px; overflow:hidden;
+    }
+    .hero-grid {
+      position:absolute; inset:0; opacity:.06;
+      background-image:
+        linear-gradient(var(--fg) 1px, transparent 1px),
+        linear-gradient(90deg, var(--fg) 1px, transparent 1px);
+      background-size:64px 64px;
+      mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 75%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, black 30%, transparent 75%);
+    }
+    .hero-glow {
+      position:absolute; top:-160px; left:50%; transform:translateX(-50%);
+      width:800px; height:800px; border-radius:50%;
+      background: radial-gradient(circle, var(--emerald), transparent 60%);
+      opacity:.25; filter:blur(80px);
+      animation: heroGlow 8s ease-in-out infinite;
+    }
+    @keyframes heroGlow {
+      0%,100%{ opacity:.25; transform:translateX(-50%) scale(1); }
+      50%{ opacity:.4; transform:translateX(-50%) scale(1.08); }
+    }
+    .container { max-width:1280px; margin:0 auto; padding:0 24px; position:relative; }
+    .badge {
+      display:flex; align-items:center; gap:12px; margin-bottom:32px;
+      font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--muted);
+    }
+    .badge .dot { position:relative; width:8px; height:8px; }
+    .badge .dot::before, .badge .dot::after {
+      content:''; position:absolute; inset:0; border-radius:50%; background:var(--emerald);
+    }
+    .badge .dot::before { animation: ping 2s cubic-bezier(0,0,.2,1) infinite; opacity:.6; }
+    @keyframes ping { 75%,100%{ transform:scale(2.5); opacity:0; } }
+
+    h1 {
+      font-family:'Fraunces',serif; font-weight:300; font-size:clamp(48px,7vw,96px);
+      line-height:.95; letter-spacing:-.02em;
+    }
+    h1 .accent { color:var(--emerald); font-style:italic; font-weight:400; position:relative; display:inline-block; }
+    h1 .accent svg { position:absolute; left:0; bottom:-8px; width:100%; height:12px; color:rgba(74,222,168,.6); }
+    .path-draw { stroke-dasharray:1; stroke-dashoffset:1; animation: drawLine 1.6s ease-out .4s forwards; }
+    @keyframes drawLine { to { stroke-dashoffset:0; } }
+
+    .hero-desc {
+      margin-top:40px; max-width:520px; font-size:18px; color:var(--muted); line-height:1.7;
+    }
+    .hero-buttons { margin-top:48px; display:flex; flex-wrap:wrap; gap:16px; }
+    .btn-primary {
+      display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
+      border-radius:999px; background:var(--emerald); color:var(--ink);
+      font-weight:500; text-decoration:none; transition:all .3s;
+    }
+    .btn-primary:hover { box-shadow:0 0 30px rgba(74,222,168,.4); transform:translateY(-2px); }
+    .btn-secondary {
+      display:inline-flex; align-items:center; gap:8px; padding:14px 28px;
+      border-radius:999px; border:1px solid var(--border); color:var(--fg);
+      text-decoration:none; transition:all .3s;
+    }
+    .btn-secondary:hover { border-color:var(--fg); transform:translateY(-2px); }
+
+    /* Live dashboard widget */
+    .dashboard {
+      border-radius:16px; border:1px solid var(--border);
+      background:rgba(26,34,48,.6); backdrop-filter:blur(8px);
+      padding:20px; box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+    }
+    .db-header {
+      display:flex; justify-content:space-between; align-items:center;
+      font-family:'JetBrains Mono',monospace; font-size:10px;
+      letter-spacing:.15em; text-transform:uppercase; color:var(--muted);
+    }
+    .db-value { margin-top:16px; font-family:'Fraunces',serif; font-size:32px; }
+    .db-bars { margin-top:20px; display:flex; align-items:end; gap:6px; height:80px; }
+    .db-bar { flex:1; border-radius:2px; background:rgba(74,222,168,.7); transform-origin:bottom; animation: barGrow 900ms cubic-bezier(.2,.8,.2,1) both; }
+    @keyframes barGrow { from { transform:scaleY(.05); } to { transform:scaleY(1); } }
+    .db-spark { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+
+    /* Stats */
+    .stats { margin-top:96px; display:grid; grid-template-columns:repeat(2,1fr); gap:32px; padding-top:40px; border-top:1px solid var(--border); }
+    @media(min-width:768px){ .stats { grid-template-columns:repeat(4,1fr); } }
+    .stat-num { font-family:'Fraunces',serif; font-size:clamp(32px,4vw,48px); }
+    .stat-label { margin-top:8px; font-size:12px; text-transform:uppercase; letter-spacing:.15em; color:var(--muted); }
+
+    /* Marquee */
+    .marquee { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:24px 0; overflow:hidden; background:rgba(26,34,48,.3); }
+    .marquee-track { display:flex; gap:48px; animation: marquee 40s linear infinite; width:max-content; }
+    .marquee-track span { font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); white-space:nowrap; display:flex; align-items:center; gap:48px; }
+    .marquee-track span::after { content:'✦'; color:var(--emerald); }
+    @keyframes marquee { from{ transform:translateX(0); } to{ transform:translateX(-33.333%); } }
+
+    /* Sections */
+    section { padding:128px 0; }
+    .section-header { margin-bottom:80px; }
+    .eyebrow { display:flex; align-items:center; gap:12px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:24px; }
+    .eyebrow::before { content:''; display:block; width:32px; height:1px; background:var(--emerald); }
+    h2 {
+      font-family:'Fraunces',serif; font-weight:300; font-size:clamp(36px,5vw,60px);
+      line-height:1.05; letter-spacing:-.02em; max-width:640px;
+    }
+    h2 .accent { color:var(--emerald); font-style:normal; }
+
+    /* Services */
+    .service-row {
+      display:grid; gap:32px; padding:32px 48px;
+      background:var(--bg); border-bottom:1px solid var(--border); transition:background .5s;
+    }
+    .service-row:hover { background:var(--bg-card); }
+    .service-row:last-child { border-bottom:none; }
+    @media(min-width:768px){ .service-row { grid-template-columns: 150px 1fr 280px; } }
+    .service-num { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--emerald); }
+    .service-tag { font-size:12px; text-transform:uppercase; letter-spacing:.15em; color:var(--muted); }
+    .service-title { font-family:'Fraunces',serif; font-size:clamp(28px,3vw,40px); letter-spacing:-.02em; }
+    .service-body { margin-top:16px; color:var(--muted); line-height:1.7; max-width:520px; }
+    .service-bullets { list-style:none; }
+    .service-bullets li { display:flex; gap:12px; font-size:14px; margin-bottom:12px; }
+    .service-bullets li::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--emerald); margin-top:8px; flex-shrink:0; }
+
+    /* Process */
+    .process-grid { display:grid; gap:1px; background:var(--border); border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+    @media(min-width:768px){ .process-grid { grid-template-columns:repeat(4,1fr); } }
+    .process-step { background:var(--bg); padding:32px; transition:background .3s; }
+    .process-step:hover { background:var(--bg-card); }
+    .process-step .num { font-family:'Fraunces',serif; font-size:24px; color:var(--emerald); }
+    .process-step .title { margin-top:24px; font-family:'Fraunces',serif; font-size:20px; }
+    .process-step .desc { margin-top:12px; font-size:14px; color:var(--muted); line-height:1.7; }
+
+    /* Stack */
+    .stack-grid { display:grid; gap:24px; }
+    @media(min-width:640px){ .stack-grid { grid-template-columns:repeat(2,1fr); } }
+    .stack-card {
+      border-radius:12px; border:1px solid var(--border); padding:24px;
+      transition:all .3s;
+    }
+    .stack-card:hover { border-color:var(--emerald); transform:translateY(-4px); background:var(--bg-card); }
+    .stack-card h4 { font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--emerald); }
+    .stack-card ul { margin-top:16px; list-style:none; font-family:'Fraunces',serif; font-size:20px; }
+    .stack-card li { margin-bottom:8px; }
+
+    /* Cases */
+    .case-card {
+      display:grid; gap:24px; padding:40px; border-radius:16px;
+      border:1px solid var(--border); background:var(--bg);
+      transition:all .5s; margin-bottom:24px;
+    }
+    .case-card:hover { border-color:var(--emerald); transform:translateY(-4px); box-shadow:0 30px 60px -30px rgba(74,222,168,.15); }
+    @media(min-width:768px){ .case-card { grid-template-columns: 200px 1fr 180px; } }
+    .case-sector { font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--muted); }
+    .case-title { font-family:'Fraunces',serif; font-size:clamp(22px,2.5vw,32px); letter-spacing:-.02em; line-height:1.2; }
+    .case-desc { margin-top:12px; font-size:14px; color:var(--muted); line-height:1.7; }
+    .case-result { font-family:'Fraunces',serif; font-size:24px; color:var(--emerald); }
+
+    /* About */
+    .about-quote { font-family:'Fraunces',serif; font-size:clamp(22px,2.5vw,32px); line-height:1.3; letter-spacing:-.02em; }
+    .about-body { color:var(--muted); line-height:1.7; }
+    .certs { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:32px; border-top:1px solid var(--border); margin-top:32px; }
+    .cert-title { font-family:'Fraunces',serif; font-size:18px; }
+    .cert-sub { font-size:12px; color:var(--muted); margin-top:4px; }
+
+    /* Contact */
+    .contact-glow {
+      position:absolute; inset:0; opacity:.15; filter:blur(80px);
+      background: radial-gradient(ellipse at 30% 50%, var(--emerald), transparent 60%);
+    }
+    .contact-form { max-width:520px; margin:48px auto 0; display:flex; flex-direction:column; gap:12px; }
+    @media(min-width:640px){ .contact-form { flex-direction:row; } }
+    .contact-form input {
+      flex:1; padding:16px 24px; border-radius:999px; background:var(--bg-card);
+      border:1px solid var(--border); color:var(--fg); font-size:14px; outline:none; transition:border .3s;
+    }
+    .contact-form input:focus { border-color:var(--emerald); }
+    .contact-form input::placeholder { color:var(--muted); }
+    .contact-form button {
+      padding:16px 28px; border-radius:999px; background:var(--emerald); color:var(--ink);
+      font-weight:500; border:none; cursor:pointer; font-size:14px; white-space:nowrap;
+      transition:all .3s;
+    }
+    .contact-form button:hover { box-shadow:0 0 30px rgba(74,222,168,.4); }
+
+    /* Footer */
+    footer { border-top:1px solid var(--border); padding:40px 0; }
+    footer .inner { max-width:1280px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; align-items:center; gap:16px; }
+    @media(min-width:640px){ footer .inner { flex-direction:row; justify-content:space-between; } }
+    footer { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); }
+
+    /* Reveal animations */
+    .reveal { opacity:0; transform:translateY(24px); transition:all .9s ease-out; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media(max-width:767px){
+      header nav { display:none; }
+      .hero .grid-hero { grid-template-columns:1fr !important; }
+      .certs { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <a href="#top" style="display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--fg);">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--emerald);box-shadow:0 0 12px var(--emerald);"></span>
+      <span class="font-display" style="font-size:18px;letter-spacing:-.02em;">Fidelis<span style="color:var(--emerald);">.</span>Analytics</span>
+    </a>
+    <nav>
+      <a href="#servicos">Serviços</a>
+      <a href="#processo">Processo</a>
+      <a href="#stack">Stack</a>
+      <a href="#cases">Cases</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+    <a href="#contato" class="cta">Falar comigo</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="badge">
+      <span class="dot"></span>
+      Consultoria em Dados · Desde 2021
+    </div>
+
+    <div style="display:grid; grid-template-columns:2fr 1fr; gap:48px; align-items:end;" class="grid-hero">
+      <div>
+        <h1>
+          Decisões claras a partir de
+          <span class="accent">
+            planilhas
+            <svg viewBox="0 0 200 12" preserveAspectRatio="none">
+              <path d="M2 8 Q 50 1 100 6 T 198 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" pathLength="1" class="path-draw"/>
+            </svg>
+          </span>
+          que ninguém mais consegue ler.
+        </h1>
+        <p class="hero-desc">
+          Sou consultor de análise de dados. Construo dashboards em Power BI,
+          modelos em Excel e automações com N8N — para que sua equipe pare de
+          conferir números e comece a usá-los.
+        </p>
+        <div class="hero-buttons">
+          <a href="#contato" class="btn-primary">Diagnóstico gratuito <span>→</span></a>
+          <a href="#cases" class="btn-secondary">Ver cases</a>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="db-header">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--emerald);animation:pulse 2s infinite;"></span>
+            Live · Vendas / semana
+          </div>
+          <span style="color:var(--emerald);">▲ 12.4%</span>
+        </div>
+        <div class="db-value">R$ 284,910</div>
+        <div class="db-bars">
+          <div class="db-bar" style="height:38%; animation-delay:0ms;"></div>
+          <div class="db-bar" style="height:52%; animation-delay:80ms;"></div>
+          <div class="db-bar" style="height:44%; animation-delay:160ms;"></div>
+          <div class="db-bar" style="height:68%; animation-delay:240ms;"></div>
+          <div class="db-bar" style="height:60%; animation-delay:320ms;"></div>
+          <div class="db-bar" style="height:82%; animation-delay:400ms;"></div>
+          <div class="db-bar" style="height:74%; animation-delay:480ms;"></div>
+        </div>
+        <div class="db-spark">
+          <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">
+            <span>Tempo até insight</span>
+            <span style="color:var(--emerald);">−63%</span>
+          </div>
+          <svg viewBox="0 0 200 40" style="width:100%;height:40px;" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="spark" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#4adea8" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#4adea8" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0 30 L25 26 L50 28 L75 20 L100 22 L125 14 L150 16 L175 8 L200 10 L200 40 L0 40 Z" fill="url(#spark)"/>
+            <path d="M0 30 L25 26 L50 28 L75 20 L100 22 L125 14 L150 16 L175 8 L200 10" fill="none" stroke="#4adea8" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div>
+        <div class="stat-num">+40</div>
+        <div class="stat-label">Dashboards entregues</div>
+      </div>
+      <div>
+        <div class="stat-num">63%</div>
+        <div class="stat-label">Redução média de tempo de relatório</div>
+      </div>
+      <div>
+        <div class="stat-num">18</div>
+        <div class="stat-label">Empresas atendidas</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">Avaliação média de clientes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Power BI</span>
+    <span>Excel Avançado</span>
+    <span>N8N</span>
+    <span>DAX</span>
+    <span>Power Query</span>
+    <span>SQL</span>
+    <span>Looker Studio</span>
+    <span>Modelagem Dimensional</span>
+    <span>ETL</span>
+    <span>API Integrations</span>
+    <span>Power BI</span>
+    <span>Excel Avançado</span>
+    <span>N8N</span>
+    <span>DAX</span>
+    <span>Power Query</span>
+    <span>SQL</span>
+    <span>Looker Studio</span>
+    <span>Modelagem Dimensional</span>
+    <span>ETL</span>
+    <span>API Integrations</span>
+    <span>Power BI</span>
+    <span>Excel Avançado</span>
+    <span>N8N</span>
+    <span>DAX</span>
+    <span>Power Query</span>
+    <span>SQL</span>
+    <span>Looker Studio</span>
+    <span>Modelagem Dimensional</span>
+    <span>ETL</span>
+    <span>API Integrations</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="servicos">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Serviços</div>
+      <h2>Três frentes,<br><span class="accent">um único objetivo:</span> dado vira decisão.</h2>
+    </div>
+
+    <div style="border-radius:16px; overflow:hidden; border:1px solid var(--border);">
+      <div class="service-row">
+        <div>
+          <div class="service-num">01</div>
+          <div class="service-tag">Business Intelligence</div>
+        </div>
+        <div>
+          <div class="service-title">Dashboards em Power BI</div>
+          <p class="service-body">Modelagem dimensional, DAX otimizado e visualizações que respondem perguntas — não só mostram números. Conecto fontes diversas (SQL, planilhas, APIs) e entrego painéis com governança e atualização automática.</p>
+        </div>
+        <ul class="service-bullets">
+          <li>Modelagem em estrela e DAX performático</li>
+          <li>Row-Level Security e workspaces</li>
+          <li>Treinamento da equipe interna</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <div>
+          <div class="service-num">02</div>
+          <div class="service-tag">Modelagem &amp; Análise</div>
+        </div>
+        <div>
+          <div class="service-title">Excel Avançado</div>
+          <p class="service-body">Para times que vivem em Excel: substituo planilhas frágeis por modelos confiáveis com Power Query, Power Pivot e fórmulas de array. Auditável, versionado e pronto para escalar.</p>
+        </div>
+        <ul class="service-bullets">
+          <li>Power Query e Power Pivot</li>
+          <li>Modelos financeiros e operacionais</li>
+          <li>Templates auditáveis e reutilizáveis</li>
+        </ul>
+      </div>
+
+      <div class="service-row">
+        <div>
+          <div class="service-num">03</div>
+          <div class="service-tag">Automação</div>
+        </div>
+        <div>
+          <div class="service-title">Workflows com N8N</div>
+          <p class="service-body">Conecto sistemas que não conversam: CRMs, planilhas, e-mail, APIs e bancos. Automatizo coletas, alertas e roteiros operacionais — sem código frágil e com observabilidade.</p>
+        </div>
+        <ul class="service-bullets">
+          <li>Integração entre SaaS e bancos de dados</li>
+          <li>Alertas, ETLs e webhooks</li>
+          <li>Self-hosted ou cloud, conforme necessidade</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="processo" style="background:rgba(26,34,48,.4); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Processo</div>
+      <h2>Quatro passos. <span class="accent">Zero retrabalho.</span></h2>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="num">I.</div>
+        <div class="title">Diagnóstico</div>
+        <p class="desc">Conversa de 45 min para mapear fontes, dores e o que precisa ser respondido.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">II.</div>
+        <div class="title">Proposta</div>
+        <p class="desc">Escopo, entregáveis e prazo claros — sem surpresas no meio do caminho.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">III.</div>
+        <div class="title">Construção</div>
+        <p class="desc">Sprints semanais com revisão. Você acompanha cada entrega antes do final.</p>
+      </div>
+      <div class="process-step">
+        <div class="num">IV.</div>
+        <div class="title">Handover</div>
+        <p class="desc">Documentação, treinamento da equipe e 30 dias de suporte pós-entrega.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="container" style="display:grid; grid-template-columns:5fr 7fr; gap:48px;">
+    <div>
+      <div class="section-header">
+        <div class="eyebrow">Stack</div>
+        <h2>Ferramentas certas, <span class="accent">no momento certo.</span></h2>
+      </div>
+      <p style="color:var(--muted); line-height:1.7; max-width:480px; margin-top:-40px;">
+        Não vendo ferramenta. Avalio o cenário e escolho o que entrega
+        valor mais rápido — frequentemente Power BI e Excel, sempre que
+        faz sentido com automação em N8N por trás.
+      </p>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <h4>Visualização</h4>
+        <ul>
+          <li>Power BI</li>
+          <li>Looker Studio</li>
+          <li>Excel Charts</li>
+        </ul>
+      </div>
+      <div class="stack-card">
+        <h4>Modelagem</h4>
+        <ul>
+          <li>DAX</li>
+          <li>Power Query M</li>
+          <li>Power Pivot</li>
+        </ul>
+      </div>
+      <div class="stack-card">
+        <h4>Dados</h4>
+        <ul>
+          <li>SQL Server</li>
+          <li>PostgreSQL</li>
+          <li>BigQuery</li>
+          <li>Sheets</li>
+        </ul>
+      </div>
+      <div class="stack-card">
+        <h4>Automação</h4>
+        <ul>
+          <li>N8N</li>
+          <li>Make</li>
+          <li>APIs REST</li>
+          <li>Webhooks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases" style="background:rgba(26,34,48,.4); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">Cases</div>
+      <h2>Resultados <span class="accent">quantificáveis.</span></h2>
+    </div>
+
+    <div>
+      <div class="case-card">
+        <div class="case-sector">Varejo · Atacado</div>
+        <div>
+          <div class="case-title">De relatórios manuais a dashboard único de vendas</div>
+          <p class="case-desc">Substituí 9 planilhas por modelo Power BI com atualização automática via N8N. Diretoria passou a abrir o painel toda segunda-feira às 8h.</p>
+        </div>
+        <div style="display:flex; justify-content:flex-end;">
+          <div class="case-result">−72% tempo de fechamento mensal</div>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-sector">Serviços B2B</div>
+        <div>
+          <div class="case-title">Modelo financeiro auditável em Excel</div>
+          <p class="case-desc">Reconstrução do modelo de DRE projetada com Power Query e validações cruzadas. Passou auditoria de fundo de investimento sem ressalvas.</p>
+        </div>
+        <div style="display:flex; justify-content:flex-end;">
+          <div class="case-result">Aprovado em due diligence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre">
+  <div class="container" style="display:grid; grid-template-columns:5fr 7fr; gap:64px;">
+    <div>
+      <div class="section-header">
+        <div class="eyebrow">Sobre</div>
+        <h2>Por que <span class="accent">comigo?</span></h2>
+      </div>
+    </div>
+    <div>
+      <p class="about-quote">
+        Passei mais de 15 anos atuando em operações, em empresas nacionais e multinacionais como GPA e Cencosud, antes de me tornar consultor. Conheço de perto a realidade de quem precisa revisar planilhas às onze da noite porque a diretoria pediu um indicador que ninguém sabe ao certo de onde surgiu.
+      </p>
+      <p class="about-body" style="margin-top:32px;">
+        Hoje aplico esse contexto em projetos de Power BI, Excel e
+        automações com N8N. Não entrego só o painel — entrego clareza
+        operacional, com documentação e treinamento para que a equipe não
+        volte a depender de mim.
+      </p>
+      <div class="certs">
+        <div>
+          <div class="cert-title">Power BI</div>
+          <div class="cert-sub">Microsoft Certified PL-300</div>
+        </div>
+        <div>
+          <div class="cert-title">Excel</div>
+          <div class="cert-sub">MOS Expert</div>
+        </div>
+        <div>
+          <div class="cert-title">N8N</div>
+          <div class="cert-sub">Community Builder</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato" style="position:relative; overflow:hidden;">
+  <div class="contact-glow" aria-hidden="true"></div>
+  <div class="container" style="position:relative; text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--emerald);">
+      ✦ Diagnóstico gratuito de 45 min
+    </div>
+    <h2 style="margin:24px auto 0; max-width:800px;">
+      Vamos olhar seus dados <span class="accent">juntos?</span>
+    </h2>
+    <p style="margin-top:32px; color:var(--muted); max-width:520px; margin-left:auto; margin-right:auto;">
+      Me conte em uma frase qual número está difícil de ver na sua
+      operação. Eu volto em até 24h com um plano objetivo.
+    </p>
+
+    <form class="contact-form" action="mailto:contato@fidelisanalytics.com" method="get" enctype="text/plain">
+      <input type="email" name="email" placeholder="seu@email.com" required>
+      <input type="hidden" name="subject" value="Diagnóstico">
+      <button type="submit">Agendar conversa →</button>
+    </form>
+
+    <div style="margin-top:40px; display:flex; justify-content:center; gap:24px; font-size:14px; color:var(--muted);">
+      <a href="mailto:contato@fidelisanalytics.com" style="color:inherit; text-decoration:none;">contato@fidelisanalytics.com</a>
+      <span>·</span>
+      <a href="#" style="color:inherit; text-decoration:none;">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="inner">
+    <div>© 2026 Fidelis Analytics</div>
+    <div>Power BI · Excel · N8N</div>
+  </div>
+</footer>
+
+<script>
+  // Simple reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
