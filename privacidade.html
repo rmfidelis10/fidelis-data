@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidade — Fidelis Data</title>
+<meta name="description" content="Política de Privacidade da Fidelis Data, em conformidade com a Lei Geral de Proteção de Dados (LGPD).">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#10141C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%2310141C'/%3E%3Crect x='9' y='21' width='5' height='10' rx='1' fill='%23C28A2E'/%3E%3Crect x='17.5' y='14' width='5' height='17' rx='1' fill='%23F4F5F7'/%3E%3Crect x='26' y='8' width='5' height='23' rx='1' fill='%23155E54'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F5F7; --panel:#FFFFFF; --ink:#10141C; --ink-soft:#525868;
+    --ink-faint:#8A8F9B; --gold:#B98A2E; --gold-soft:#F4E6C6;
+    --teal:#155E54; --teal-soft:#D9ECE8; --line:#DBDEE4; --line-soft:#E8E9ED;
+    --radius-sm:6px; --radius:10px; --radius-lg:16px; --maxw:780px;
+    --shadow: 0 1px 2px rgba(16,20,28,0.04), 0 8px 24px rgba(16,20,28,0.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Inter',sans-serif; font-size:16px; line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image: linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:64px 64px; opacity:0.5;
+    mask-image: linear-gradient(to bottom, black, black 60%, transparent 100%);
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em; color:var(--ink);}
+  p{margin:0;}
+  a{color:var(--teal); text-decoration:underline;}
+  a:hover{color:var(--ink);}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  .content-wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* Nav */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(244,245,247,0.86); backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1180px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:11px; text-decoration:none;}
+  .brand-mark{width:34px; height:34px; flex:none;}
+  .brand-text{display:flex; flex-direction:column; line-height:1.1;}
+  .brand-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16.5px; color:var(--ink);}
+  .brand-tag{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:.02em;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14px;
+    padding:10px 20px; border-radius:999px; text-decoration:none; cursor:pointer;
+    border:1px solid var(--line); background:transparent; color:var(--ink);
+    transition:border-color .15s ease;
+  }
+  .btn:hover{border-color:var(--ink);}
+
+  /* Page header */
+  .page-header{padding:56px 0 40px;}
+  .page-header .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal);
+    background:var(--teal-soft); border-radius:999px; padding:5px 12px; margin-bottom:18px;
+  }
+  .page-header .eyebrow::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--teal);}
+  .page-header h1{font-size:clamp(1.8rem,3vw,2.4rem); font-weight:600; margin-bottom:14px;}
+  .page-header .meta{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-faint); display:flex; gap:20px; flex-wrap:wrap;}
+
+  /* Article body */
+  .article{padding-bottom:80px;}
+  .article section{margin-bottom:42px;}
+  .article h2{
+    font-size:1.15rem; font-weight:600; margin-bottom:12px;
+    padding-bottom:10px; border-bottom:1px solid var(--line-soft);
+    display:flex; align-items:center; gap:10px;
+  }
+  .article h2 .num{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold);
+    background:var(--gold-soft); border-radius:4px; padding:2px 7px; flex:none;
+  }
+  .article p{color:var(--ink-soft); margin-bottom:12px; font-size:15.5px;}
+  .article p:last-child{margin-bottom:0;}
+  .article ul{list-style:none; padding:0; margin:0 0 12px; display:flex; flex-direction:column; gap:8px;}
+  .article ul li{font-size:15.5px; color:var(--ink-soft); display:flex; gap:10px; align-items:baseline;}
+  .article ul li::before{content:"—"; color:var(--ink-faint); font-family:'IBM Plex Mono',monospace; flex:none;}
+  .article strong{color:var(--ink); font-weight:600;}
+
+  /* Info card */
+  .info-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:22px 24px; margin-bottom:42px; display:flex; flex-direction:column; gap:10px;
+  }
+  .info-card .ic-label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em;}
+  .info-card .ic-value{font-size:15px; color:var(--ink-soft);}
+  .info-card .ic-value strong{color:var(--ink);}
+
+  /* Table */
+  .cookie-table{width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:14px;}
+  .cookie-table th{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:.03em; text-align:left;
+    padding:8px 12px; border-bottom:2px solid var(--line); background:var(--paper);
+  }
+  .cookie-table td{padding:10px 12px; border-bottom:1px solid var(--line-soft); color:var(--ink-soft); vertical-align:top;}
+  .cookie-table tr:last-child td{border-bottom:none;}
+  .cookie-table .badge{
+    display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    padding:2px 8px; border-radius:999px;
+  }
+  .badge-required{background:var(--teal-soft); color:var(--teal);}
+  .badge-analytics{background:var(--gold-soft); color:#7A5A1E;}
+  .badge-marketing{background:#EDE9F7; color:#5B4FB0;}
+
+  /* Rights grid */
+  .rights-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px;}
+  @media(max-width:600px){.rights-grid{grid-template-columns:1fr;}}
+  .right-item{
+    background:var(--panel); border:1px solid var(--line-soft); border-radius:var(--radius);
+    padding:14px 16px;
+  }
+  .right-item h3{font-size:14px; font-weight:600; margin-bottom:4px;}
+  .right-item p{font-size:13.5px; color:var(--ink-faint); margin:0;}
+
+  /* Footer */
+  .footer{background:var(--ink); color:#A7ACB8; padding:36px 0; border-top:1px solid #232838;}
+  .footer-inner{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:center;}
+  .footer .brand-name{color:#F4F5F7;}
+  .footer .brand-tag{color:#7D8392;}
+  .footer-copy{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#666C7A;}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40">
+        <rect width="40" height="40" rx="8" fill="#10141C"/>
+        <rect x="9" y="21" width="5" height="10" rx="1" fill="#B98A2E"/>
+        <rect x="17.5" y="14" width="5" height="17" rx="1" fill="#F4F5F7"/>
+        <rect x="26" y="8" width="5" height="23" rx="1" fill="#155E54"/>
+      </svg>
+      <span class="brand-text">
+        <span class="brand-name">Fidelis Data</span>
+        <span class="brand-tag">fidelisdata.com.br</span>
+      </span>
+    </a>
+    <a href="index.html" class="btn">← Voltar ao site</a>
+  </div>
+</header>
+
+<main>
+  <div class="content-wrap">
+
+    <div class="page-header">
+      <span class="eyebrow">LGPD · Lei 13.709/2018</span>
+      <h1>Política de Privacidade</h1>
+      <div class="meta">
+        <span>Última atualização: julho de 2026</span>
+        <span>Versão 1.0</span>
+      </div>
+    </div>
+
+    <!-- Controlador -->
+    <div class="info-card">
+      <div>
+        <div class="ic-label">Controlador dos dados</div>
+        <div class="ic-value"><strong>Ricardo Fidelis</strong> — Fidelis Data</div>
+      </div>
+      <div>
+        <div class="ic-label">Site</div>
+        <div class="ic-value"><strong>fidelisdata.com.br</strong></div>
+      </div>
+      <div>
+        <div class="ic-label">Contato do encarregado (DPO)</div>
+        <div class="ic-value"><a href="mailto:rmfidelis10@gmail.com">rmfidelis10@gmail.com</a></div>
+      </div>
+      <div>
+        <div class="ic-label">Base legal principal</div>
+        <div class="ic-value">Legítimo interesse e consentimento (Art. 7º, II e IX — LGPD)</div>
+      </div>
+    </div>
+
+    <div class="article">
+
+      <section>
+        <h2><span class="num">01</span> Sobre esta política</h2>
+        <p>Esta Política de Privacidade descreve como a <strong>Fidelis Data</strong>, operada por Ricardo Fidelis (pessoa física), coleta, utiliza, armazena e protege os dados pessoais dos visitantes e clientes do site <strong>fidelisdata.com.br</strong>, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
+        <p>Ao navegar por este site ou entrar em contato conosco, você concorda com as práticas descritas neste documento. Caso não concorde, pedimos que não utilize o site.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">02</span> Quais dados coletamos</h2>
+        <p>Coletamos dados de duas formas: diretamente (quando você nos fornece) e indiretamente (por tecnologias de rastreamento).</p>
+        <p><strong>Dados fornecidos diretamente:</strong></p>
+        <ul>
+          <li>Nome e endereço de e-mail (quando você nos contata por e-mail ou formulário)</li>
+          <li>Número de telefone / WhatsApp (quando você inicia uma conversa via WhatsApp)</li>
+          <li>Informações sobre sua empresa ou projeto (compartilhadas voluntariamente no contato)</li>
+        </ul>
+        <p><strong>Dados coletados automaticamente:</strong></p>
+        <ul>
+          <li>Endereço IP e localização geográfica aproximada</li>
+          <li>Tipo de navegador, dispositivo e sistema operacional</li>
+          <li>Páginas visitadas, tempo de permanência e origem do acesso</li>
+          <li>Interações com o site (cliques, rolagem, botões acessados)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="num">03</span> Como usamos os dados</h2>
+        <ul>
+          <li>Responder solicitações de orçamento, diagnóstico ou suporte</li>
+          <li>Entender o comportamento dos visitantes para melhorar o site e o conteúdo</li>
+          <li>Mensurar o desempenho de campanhas de marketing (quando aplicável)</li>
+          <li>Cumprir obrigações legais e regulatórias</li>
+        </ul>
+        <p>Não vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros para fins comerciais próprios desses terceiros.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">04</span> Cookies e rastreadores</h2>
+        <p>Este site utiliza cookies e tecnologias similares. Veja a descrição de cada um:</p>
+        <table class="cookie-table">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Finalidade</th>
+              <th>Tipo</th>
+              <th>Retenção</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Google Analytics 4</strong></td>
+              <td>Análise de tráfego e comportamento no site</td>
+              <td><span class="badge badge-analytics">Analítico</span></td>
+              <td>26 meses</td>
+            </tr>
+            <tr>
+              <td><strong>Meta Pixel (Facebook)</strong></td>
+              <td>Mensuração de campanhas e remarketing</td>
+              <td><span class="badge badge-marketing">Marketing</span></td>
+              <td>180 dias</td>
+            </tr>
+            <tr>
+              <td><strong>WhatsApp (Meta)</strong></td>
+              <td>Canal de contato direto</td>
+              <td><span class="badge badge-required">Funcional</span></td>
+              <td>Conforme política da Meta</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Você pode desativar cookies a qualquer momento nas configurações do seu navegador. A desativação dos cookies analíticos e de marketing não impede o uso do site, mas pode limitar algumas funcionalidades.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">05</span> Compartilhamento com terceiros</h2>
+        <p>Os dados coletados por rastreadores são processados pelas seguintes plataformas, cada uma com sua própria política de privacidade:</p>
+        <ul>
+          <li><strong>Google LLC</strong> (Google Analytics) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+          <li><strong>Meta Platforms Inc.</strong> (Meta Pixel e WhatsApp) — <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener">facebook.com/privacy/policy</a></li>
+          <li><strong>GitHub Inc.</strong> (hospedagem do site via GitHub Pages) — <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">docs.github.com/privacy</a></li>
+        </ul>
+        <p>Esses serviços podem realizar transferências internacionais de dados. Quando isso ocorre, adotamos as salvaguardas previstas nos Arts. 33 a 36 da LGPD.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">06</span> Seus direitos como titular</h2>
+        <p>Nos termos do Art. 18 da LGPD, você tem os seguintes direitos sobre seus dados pessoais:</p>
+        <div class="rights-grid">
+          <div class="right-item">
+            <h3>Confirmação e acesso</h3>
+            <p>Saber se tratamos seus dados e acessar uma cópia deles.</p>
+          </div>
+          <div class="right-item">
+            <h3>Correção</h3>
+            <p>Solicitar a atualização de dados incompletos ou desatualizados.</p>
+          </div>
+          <div class="right-item">
+            <h3>Anonimização ou exclusão</h3>
+            <p>Solicitar que dados desnecessários sejam removidos ou anonimizados.</p>
+          </div>
+          <div class="right-item">
+            <h3>Portabilidade</h3>
+            <p>Receber seus dados em formato estruturado e legível por máquina.</p>
+          </div>
+          <div class="right-item">
+            <h3>Revogação do consentimento</h3>
+            <p>Retirar o consentimento a qualquer momento, sem prejuízo.</p>
+          </div>
+          <div class="right-item">
+            <h3>Oposição</h3>
+            <p>Opor-se ao tratamento realizado com base em legítimo interesse.</p>
+          </div>
+        </div>
+        <p style="margin-top:16px;">Para exercer qualquer um desses direitos, entre em contato pelo e-mail <a href="mailto:rmfidelis10@gmail.com">rmfidelis10@gmail.com</a>. Responderemos em até <strong>15 dias úteis</strong>.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">07</span> Segurança dos dados</h2>
+        <p>Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados pessoais contra acesso não autorizado, perda, destruição ou divulgação indevida, incluindo:</p>
+        <ul>
+          <li>Comunicação criptografada via HTTPS (TLS) em todo o site</li>
+          <li>Acesso restrito aos dados apenas às pessoas que necessitam deles para prestar o serviço</li>
+          <li>Não armazenamos senhas ou dados de pagamento em nossos sistemas</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="num">08</span> Retenção de dados</h2>
+        <p>Mantemos seus dados apenas pelo tempo necessário para cumprir a finalidade para a qual foram coletados ou para atender obrigações legais:</p>
+        <ul>
+          <li><strong>Dados de contato (e-mail / WhatsApp):</strong> enquanto houver relação comercial ativa, ou até a solicitação de exclusão</li>
+          <li><strong>Dados analíticos (Google Analytics):</strong> até 26 meses, conforme configuração da plataforma</li>
+          <li><strong>Dados de marketing (Meta Pixel):</strong> até 180 dias</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2><span class="num">09</span> Alterações nesta política</h2>
+        <p>Podemos atualizar esta Política de Privacidade periodicamente. Quando isso ocorrer, atualizaremos a data de "última atualização" no topo desta página. Recomendamos que você revise esta política regularmente.</p>
+        <p>Em caso de alterações significativas que afetem o tratamento de seus dados, notificaremos pelos canais de contato disponíveis.</p>
+      </section>
+
+      <section>
+        <h2><span class="num">10</span> Contato e reclamações</h2>
+        <p>Para qualquer dúvida, solicitação ou reclamação relacionada ao tratamento dos seus dados pessoais, entre em contato:</p>
+        <ul>
+          <li><strong>E-mail:</strong> <a href="mailto:rmfidelis10@gmail.com">rmfidelis10@gmail.com</a></li>
+          <li><strong>Site:</strong> <a href="https://fidelisdata.com.br">fidelisdata.com.br</a></li>
+        </ul>
+        <p>Você também tem o direito de apresentar reclamação à <strong>Autoridade Nacional de Proteção de Dados (ANPD)</strong>, pelo site <a href="https://www.gov.br/anpd" target="_blank" rel="noopener">gov.br/anpd</a>.</p>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="index.html" class="brand">
+        <svg class="brand-mark" viewBox="0 0 40 40">
+          <rect width="40" height="40" rx="8" fill="#1A1F2B"/>
+          <rect x="9" y="21" width="5" height="10" rx="1" fill="#B98A2E"/>
+          <rect x="17.5" y="14" width="5" height="17" rx="1" fill="#F4F5F7"/>
+          <rect x="26" y="8" width="5" height="23" rx="1" fill="#3A8F82"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">Fidelis Data</span>
+          <span class="brand-tag">fidelisdata.com.br</span>
+        </span>
+      </a>
+      <span class="footer-copy">© 2026 Fidelis Data · Política de Privacidade v1.0</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
