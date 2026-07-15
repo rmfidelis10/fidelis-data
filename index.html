@@ -301,6 +301,43 @@
   .why-panel-quote span{color:var(--gold);}
   .why-panel-foot{font-family:'IBM Plex Mono',monospace; font-size:12px; color:#9AA0AE; border-top:1px solid #2A2F3A; padding-top:18px;}
 
+  /* ---------- Pricing ---------- */
+  .pricing-grid{display:grid; grid-template-columns:1fr; gap:22px;}
+  @media(min-width:880px){ .pricing-grid{grid-template-columns:repeat(3, 1fr); align-items:stretch;} }
+  .price-card{
+    position:relative; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-lg);
+    padding:30px 26px 28px; display:flex; flex-direction:column;
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease, border-color .25s ease;
+  }
+  .price-card:hover{transform:translateY(-5px); box-shadow:var(--shadow);}
+  .price-card.featured{
+    background:var(--ink); border-color:var(--ink); color:var(--paper);
+  }
+  @media(min-width:880px){ .price-card.featured{transform:scale(1.035);} .price-card.featured:hover{transform:scale(1.035) translateY(-5px);} }
+  .price-badge{
+    position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:var(--ink); font-family:'IBM Plex Mono',monospace; font-size:11px;
+    font-weight:600; letter-spacing:.04em; text-transform:uppercase; padding:6px 14px; border-radius:999px;
+    white-space:nowrap; box-shadow:0 4px 12px rgba(185,138,46,0.35);
+  }
+  .price-name{font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:600; margin-bottom:8px;}
+  .price-card.featured .price-name{color:var(--paper);}
+  .price-desc{font-size:14px; color:var(--ink-soft); min-height:44px; margin-bottom:20px;}
+  .price-card.featured .price-desc{color:#B9BEC9;}
+  .price-value{display:flex; align-items:baseline; gap:3px; margin-bottom:24px;}
+  .price-value .curr{font-family:'IBM Plex Mono',monospace; font-size:15px; color:var(--ink-faint); align-self:flex-start; margin-top:6px;}
+  .price-card.featured .price-value .curr{color:#7D8392;}
+  .price-value .amount{font-family:'Space Grotesk',sans-serif; font-size:2.5rem; font-weight:600; line-height:1;}
+  .price-value .amount.sob-consulta{font-size:1.9rem;}
+  .price-value .per{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--ink-faint); align-self:flex-end; margin-bottom:5px;}
+  .price-card.featured .price-value .per{color:#7D8392;}
+  .price-list{list-style:none; margin:0 0 26px; padding:0; display:flex; flex-direction:column; gap:11px; flex:1;}
+  .price-list li{font-size:14px; color:var(--ink-soft); display:flex; gap:9px; align-items:flex-start;}
+  .price-card.featured .price-list li{color:#D6D9DE;}
+  .price-list li svg{flex:none; margin-top:2px; color:var(--gold);}
+  .price-card .btn{width:100%;}
+  .price-note{margin-top:36px; font-size:13px; color:var(--ink-faint); text-align:center;}
+
   /* ---------- CTA band ---------- */
   .cta-band{background:var(--ink); color:var(--paper); padding:80px 0;}
   .cta-inner{display:flex; flex-direction:column; align-items:flex-start; gap:24px;}
@@ -423,6 +460,7 @@
       <li><a href="#projeto">Projeto real</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
       <li><a href="#diferenciais">Diferenciais</a></li>
+      <li><a href="#planos">Planos</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
     <div class="nav-right">
@@ -861,6 +899,76 @@
     </div>
   </section>
 
+  <!-- ============ PRICING ============ -->
+  <section class="section" id="planos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Planos</span>
+        <h2>Um plano para cada etapa da sua operação de dados.</h2>
+        <p class="section-desc">Valores de referência para contratos recorrentes de manutenção e evolução. Projetos pontuais são orçados à parte.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <div class="price-card reveal">
+          <div class="price-name">Starter</div>
+          <div class="price-desc">Ideal para pequenas empresas começando com análise de dados.</div>
+          <div class="price-value">
+            <span class="curr mono">R$</span>
+            <span class="amount">297</span>
+            <span class="per">/mês</span>
+          </div>
+          <ul class="price-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Até 100K registros</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>3 dashboards personalizados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>5 conectores de dados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Relatórios semanais</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Suporte por e-mail</li>
+          </ul>
+          <a href="mailto:rmfidelis10@gmail.com?subject=Plano%20Starter%20-%20Fidelis%20Data" class="btn btn-ghost">Começar agora</a>
+        </div>
+
+        <div class="price-card featured reveal">
+          <span class="price-badge">Mais popular</span>
+          <div class="price-name">Professional</div>
+          <div class="price-desc">Para empresas em crescimento que precisam de mais poder analítico.</div>
+          <div class="price-value">
+            <span class="curr mono">R$</span>
+            <span class="amount">797</span>
+            <span class="per">/mês</span>
+          </div>
+          <ul class="price-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Até 1M registros</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dashboards ilimitados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>50 conectores de dados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>IA generativa para análises</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Análise preditiva básica</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Suporte prioritário</li>
+          </ul>
+          <a href="mailto:rmfidelis10@gmail.com?subject=Plano%20Professional%20-%20Fidelis%20Data" class="btn btn-on-dark">Começar agora</a>
+        </div>
+
+        <div class="price-card reveal">
+          <div class="price-name">Enterprise</div>
+          <div class="price-desc">Solução completa para grandes empresas com necessidades complexas.</div>
+          <div class="price-value">
+            <span class="amount sob-consulta">Sob consulta</span>
+          </div>
+          <ul class="price-list">
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Registros ilimitados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Conectores ilimitados</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>IA avançada + modelos custom</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Análise preditiva completa</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SLA 99,99% garantido</li>
+            <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Consultor dedicado 24/7</li>
+          </ul>
+          <a href="mailto:rmfidelis10@gmail.com?subject=Plano%20Enterprise%20-%20Fidelis%20Data" class="btn btn-ghost">Falar com consultor</a>
+        </div>
+
+      </div>
+      <p class="price-note mono">Preços em reais (BRL). Contratos com fidelidade mínima de 3 meses. Valores sujeitos a reajuste conforme escopo e volume de dados.</p>
+    </div>
+  </section>
+
   <!-- ============ CTA BAND ============ -->
   <section class="cta-band" id="contato">
     <div class="wrap cta-inner">
@@ -961,7 +1069,7 @@
   });
 
   /* Scroll reveal (com leve atraso progressivo dentro de grids/listas) */
-  var staggerParents = ['.services-grid', '.process-list', '.why-list'];
+  var staggerParents = ['.services-grid', '.process-list', '.why-list', '.pricing-grid'];
   function getStaggerDelay(el){
     for(var i=0;i<staggerParents.length;i++){
       var parent = el.closest(staggerParents[i]);
